@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35514.174 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CF55B209-EA34-43EE-A12D-D97F7A27A23A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{EC7EC104-8B4F-4026-97AC-881BFD119621}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{F5E0CAD3-E5F5-4524-A597-009FFCBE5323}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{27A9CF75-F1BE-4EF0-98EB-EADB7EC02D3C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{02DA56A9-B6B5-4E79-A9C5-AF7753E43893}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlorriJobs.Application", "GlorriJobs.Application\GlorriJobs.Application.csproj", "{21AF63A2-128C-4D81-9C62-436C2E4F9A1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlorriJobs.Domain", "GlorriJobs.Domain\GlorriJobs.Domain.csproj", "{3E112C34-487D-4F5E-AD9D-777EA2B2C157}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlorriJobs.WebAPI", "GlorriJobs.WebAPI\GlorriJobs.WebAPI.csproj", "{33AD63E1-0F9B-4FA0-B2F9-657B76F79668}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlorriJobs.Infrastructure", "GlorriJobs.Infrastructure\GlorriJobs.Infrastructure.csproj", "{AC5FC930-155C-4EDA-B15D-4B6E815099D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlorriJobs.Persistence", "GlorriJobs.Persistence\GlorriJobs.Persistence.csproj", "{D2C62CC2-8408-4F6C-9419-0D3493F66F3F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{21AF63A2-128C-4D81-9C62-436C2E4F9A1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21AF63A2-128C-4D81-9C62-436C2E4F9A1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21AF63A2-128C-4D81-9C62-436C2E4F9A1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21AF63A2-128C-4D81-9C62-436C2E4F9A1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E112C34-487D-4F5E-AD9D-777EA2B2C157}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E112C34-487D-4F5E-AD9D-777EA2B2C157}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E112C34-487D-4F5E-AD9D-777EA2B2C157}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E112C34-487D-4F5E-AD9D-777EA2B2C157}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33AD63E1-0F9B-4FA0-B2F9-657B76F79668}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33AD63E1-0F9B-4FA0-B2F9-657B76F79668}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33AD63E1-0F9B-4FA0-B2F9-657B76F79668}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33AD63E1-0F9B-4FA0-B2F9-657B76F79668}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC5FC930-155C-4EDA-B15D-4B6E815099D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC5FC930-155C-4EDA-B15D-4B6E815099D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC5FC930-155C-4EDA-B15D-4B6E815099D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC5FC930-155C-4EDA-B15D-4B6E815099D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2C62CC2-8408-4F6C-9419-0D3493F66F3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2C62CC2-8408-4F6C-9419-0D3493F66F3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2C62CC2-8408-4F6C-9419-0D3493F66F3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2C62CC2-8408-4F6C-9419-0D3493F66F3F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{02DA56A9-B6B5-4E79-A9C5-AF7753E43893} = {CF55B209-EA34-43EE-A12D-D97F7A27A23A}
+		{21AF63A2-128C-4D81-9C62-436C2E4F9A1B} = {02DA56A9-B6B5-4E79-A9C5-AF7753E43893}
+		{3E112C34-487D-4F5E-AD9D-777EA2B2C157} = {02DA56A9-B6B5-4E79-A9C5-AF7753E43893}
+		{33AD63E1-0F9B-4FA0-B2F9-657B76F79668} = {27A9CF75-F1BE-4EF0-98EB-EADB7EC02D3C}
+		{AC5FC930-155C-4EDA-B15D-4B6E815099D2} = {EC7EC104-8B4F-4026-97AC-881BFD119621}
+		{D2C62CC2-8408-4F6C-9419-0D3493F66F3F} = {EC7EC104-8B4F-4026-97AC-881BFD119621}
+	EndGlobalSection
+EndGlobal
