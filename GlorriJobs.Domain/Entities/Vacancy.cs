@@ -10,11 +10,12 @@ public class Vacancy : BaseEntity
     public string Title { get; set; }
     public Guid VacancyTypeId { get; set; } // Self-referencing FK
     public Vacancy VacancyType { get; set; }
+    public VacancyDetail VacancyDetail { get; set; }
 
     public Guid CategoryId { get; set; }
     public Category Category { get; set; }
 
-    public Guid CompanyId { get; set; }
+    public Guid CompanyId { get; set; } 
     public Company Company { get; set; }
 
     public Guid BranchId { get; set; }
@@ -30,4 +31,5 @@ public class Vacancy : BaseEntity
     public bool IsRemote { get; set; }
     public JobLevel JobLevel { get; set; }
     public int ViewCount { get; set; }
+    public DateTime ExpireDate { get; set; }
 }
