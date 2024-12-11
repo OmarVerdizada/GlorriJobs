@@ -22,7 +22,7 @@ namespace GlorriJobs.Persistence.Contexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=localhost,1433;Database=GlorriJobsDb;User Id=sa;Password=P@ssw0rd;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer(@"Server=WINDOWS-UTHG35J\\SQLEXPRESS;Database=GlorriJobs;Trusted_Connection=True;TrustServerCertificate=True;");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
