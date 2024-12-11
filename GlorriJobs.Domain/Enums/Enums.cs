@@ -4,17 +4,16 @@
     {
         FullTime,
         PartTime,
-        Freelance,
         Internship,
-        Temporary
+        Freelance
     }
+
 
     public enum JobLevel
     {
-        EntryLevel,
-        MidLevel,
-        SeniorLevel,
-        Director,
-        Executive
+        Junior,
+        Mid,
+        Senior,
+        Lead
     }
 }

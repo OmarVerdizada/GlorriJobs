@@ -1,9 +1,8 @@
-﻿namespace GlorriJobs.Domain.Entities
+﻿using GlorriJobs.Domain.Entities;
+
+public class City : BaseEntity
 {
-    public class City : BaseEntity
-    {
-        public string Name { get; set; }
-        public ICollection<Branch> Branches { get; set; }
-        public ICollection<Vacancy> Vacancies { get; set; }
-    }
+    public string Name { get; set; }
+    public ICollection<Branch> Branches { get; set; }
+    public ICollection<Vacancy> Vacancies { get; set; }
 }

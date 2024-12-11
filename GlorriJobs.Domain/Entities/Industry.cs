@@ -1,8 +1,7 @@
-﻿namespace GlorriJobs.Domain.Entities
+﻿using GlorriJobs.Domain.Entities;
+
+public class Industry : BaseEntity
 {
-    public class Industry : BaseEntity
-    {
-        public string Name { get; set; }
-        public ICollection<Company> Companies { get; set; }
-    }
+    public string Name { get; set; }
+    public ICollection<Company> Companies { get; set; }
 }

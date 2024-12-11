@@ -12,20 +12,20 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GlorriJobs.Persistence.Migrations
 {
     [DbContext(typeof(GlorriJobsDbContext))]
-    [Migration("20241207223910_AddedSomeCodes")]
-    partial class AddedSomeCodes
+    [Migration("20241211224411_Updated")]
+    partial class Updated
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.0")
+                .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("GlorriJobs.Domain.Entities.Biography", b =>
+            modelBuilder.Entity("Biography", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -67,7 +67,7 @@ namespace GlorriJobs.Persistence.Migrations
                     b.ToTable("Biographies");
                 });
 
-            modelBuilder.Entity("GlorriJobs.Domain.Entities.Branch", b =>
+            modelBuilder.Entity("Branch", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -113,7 +113,7 @@ namespace GlorriJobs.Persistence.Migrations
                     b.ToTable("Branches");
                 });
 
-            modelBuilder.Entity("GlorriJobs.Domain.Entities.Category", b =>
+            modelBuilder.Entity("Category", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -145,7 +145,7 @@ namespace GlorriJobs.Persistence.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("GlorriJobs.Domain.Entities.City", b =>
+            modelBuilder.Entity("City", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -174,7 +174,7 @@ namespace GlorriJobs.Persistence.Migrations
                     b.ToTable("Cities");
                 });
 
-            modelBuilder.Entity("GlorriJobs.Domain.Entities.Company", b =>
+            modelBuilder.Entity("Company", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -227,7 +227,7 @@ namespace GlorriJobs.Persistence.Migrations
                     b.ToTable("Companies");
                 });
 
-            modelBuilder.Entity("GlorriJobs.Domain.Entities.CompanyDetail", b =>
+            modelBuilder.Entity("CompanyDetail", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -262,7 +262,7 @@ namespace GlorriJobs.Persistence.Migrations
                     b.ToTable("CompanyDetails");
                 });
 
-            modelBuilder.Entity("GlorriJobs.Domain.Entities.Department", b =>
+            modelBuilder.Entity("Department", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -301,7 +301,7 @@ namespace GlorriJobs.Persistence.Migrations
                     b.ToTable("Departments");
                 });
 
-            modelBuilder.Entity("GlorriJobs.Domain.Entities.Industry", b =>
+            modelBuilder.Entity("Industry", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -339,19 +339,10 @@ namespace GlorriJobs.Persistence.Migrations
                     b.Property<Guid>("BranchId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("BranchId1")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("CategoryId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CategoryId1")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("CityId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("CityId1")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CompanyId")
@@ -367,9 +358,6 @@ namespace GlorriJobs.Persistence.Migrations
                     b.Property<Guid>("DepartmentId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("DepartmentId1")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("ExpireDate")
                         .HasColumnType("datetime2");
 
@@ -382,9 +370,6 @@ namespace GlorriJobs.Persistence.Migrations
                     b.Property<int>("JobLevel")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("ParentVacancyId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -396,8 +381,8 @@ namespace GlorriJobs.Persistence.Migrations
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("VacancyTypeId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("VacancyType")
+                        .HasColumnType("int");
 
                     b.Property<int>("ViewCount")
                         .HasColumnType("int");
@@ -406,25 +391,13 @@ namespace GlorriJobs.Persistence.Migrations
 
                     b.HasIndex("BranchId");
 
-                    b.HasIndex("BranchId1");
-
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("CategoryId1");
-
                     b.HasIndex("CityId");
-
-                    b.HasIndex("CityId1");
 
                     b.HasIndex("CompanyId");
 
                     b.HasIndex("DepartmentId");
-
-                    b.HasIndex("DepartmentId1");
-
-                    b.HasIndex("ParentVacancyId");
-
-                    b.HasIndex("VacancyTypeId");
 
                     b.ToTable("Vacancies");
                 });
@@ -446,12 +419,6 @@ namespace GlorriJobs.Persistence.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("ExpireDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("RelatedVacancyId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Salary")
                         .HasColumnType("nvarchar(max)");
 
@@ -465,25 +432,17 @@ namespace GlorriJobs.Persistence.Migrations
                     b.Property<Guid>("VacancyId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("VacancyId1")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("RelatedVacancyId");
-
-                    b.HasIndex("VacancyId");
-
-                    b.HasIndex("VacancyId1")
-                        .IsUnique()
-                        .HasFilter("[VacancyId1] IS NOT NULL");
+                    b.HasIndex("VacancyId")
+                        .IsUnique();
 
                     b.ToTable("VacancyDetails");
                 });
 
-            modelBuilder.Entity("GlorriJobs.Domain.Entities.Biography", b =>
+            modelBuilder.Entity("Biography", b =>
                 {
-                    b.HasOne("GlorriJobs.Domain.Entities.Company", "Company")
+                    b.HasOne("Company", "Company")
                         .WithMany("Biographies")
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -492,24 +451,24 @@ namespace GlorriJobs.Persistence.Migrations
                     b.Navigation("Company");
                 });
 
-            modelBuilder.Entity("GlorriJobs.Domain.Entities.Branch", b =>
+            modelBuilder.Entity("Branch", b =>
                 {
-                    b.HasOne("GlorriJobs.Domain.Entities.City", "City")
+                    b.HasOne("City", "City")
                         .WithMany("Branches")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GlorriJobs.Domain.Entities.Company", null)
+                    b.HasOne("Company", null)
                         .WithMany("Branches")
                         .HasForeignKey("CompanyId");
 
                     b.Navigation("City");
                 });
 
-            modelBuilder.Entity("GlorriJobs.Domain.Entities.Company", b =>
+            modelBuilder.Entity("Company", b =>
                 {
-                    b.HasOne("GlorriJobs.Domain.Entities.Industry", "Industry")
+                    b.HasOne("Industry", "Industry")
                         .WithMany("Companies")
                         .HasForeignKey("IndustryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -518,26 +477,26 @@ namespace GlorriJobs.Persistence.Migrations
                     b.Navigation("Industry");
                 });
 
-            modelBuilder.Entity("GlorriJobs.Domain.Entities.CompanyDetail", b =>
+            modelBuilder.Entity("CompanyDetail", b =>
                 {
-                    b.HasOne("GlorriJobs.Domain.Entities.Company", "Company")
+                    b.HasOne("Company", "Company")
                         .WithOne("CompanyDetail")
-                        .HasForeignKey("GlorriJobs.Domain.Entities.CompanyDetail", "CompanyId")
+                        .HasForeignKey("CompanyDetail", "CompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Company");
                 });
 
-            modelBuilder.Entity("GlorriJobs.Domain.Entities.Department", b =>
+            modelBuilder.Entity("Department", b =>
                 {
-                    b.HasOne("GlorriJobs.Domain.Entities.Branch", "Branch")
+                    b.HasOne("Branch", "Branch")
                         .WithMany("Departments")
                         .HasForeignKey("BranchId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GlorriJobs.Domain.Entities.Company", null)
+                    b.HasOne("Company", null)
                         .WithMany("Departments")
                         .HasForeignKey("CompanyId");
 
@@ -546,61 +505,34 @@ namespace GlorriJobs.Persistence.Migrations
 
             modelBuilder.Entity("Vacancy", b =>
                 {
-                    b.HasOne("GlorriJobs.Domain.Entities.Branch", "Branch")
-                        .WithMany()
+                    b.HasOne("Branch", "Branch")
+                        .WithMany("Vacancies")
                         .HasForeignKey("BranchId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("GlorriJobs.Domain.Entities.Branch", null)
+                    b.HasOne("Category", "Category")
                         .WithMany("Vacancies")
-                        .HasForeignKey("BranchId1");
-
-                    b.HasOne("GlorriJobs.Domain.Entities.Category", "Category")
-                        .WithMany()
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("GlorriJobs.Domain.Entities.Category", null)
+                    b.HasOne("City", "City")
                         .WithMany("Vacancies")
-                        .HasForeignKey("CategoryId1");
-
-                    b.HasOne("GlorriJobs.Domain.Entities.City", "City")
-                        .WithMany()
                         .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("GlorriJobs.Domain.Entities.City", null)
-                        .WithMany("Vacancies")
-                        .HasForeignKey("CityId1");
-
-                    b.HasOne("GlorriJobs.Domain.Entities.Company", "Company")
+                    b.HasOne("Company", "Company")
                         .WithMany("Vacancies")
                         .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("GlorriJobs.Domain.Entities.Department", "Department")
-                        .WithMany()
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("GlorriJobs.Domain.Entities.Department", null)
+                    b.HasOne("Department", "Department")
                         .WithMany("Vacancies")
-                        .HasForeignKey("DepartmentId1");
-
-                    b.HasOne("Vacancy", "ParentVacancy")
-                        .WithMany("SubVacancies")
-                        .HasForeignKey("ParentVacancyId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("Vacancy", "VacancyType")
-                        .WithMany()
-                        .HasForeignKey("VacancyTypeId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Branch");
@@ -612,54 +544,39 @@ namespace GlorriJobs.Persistence.Migrations
                     b.Navigation("Company");
 
                     b.Navigation("Department");
-
-                    b.Navigation("ParentVacancy");
-
-                    b.Navigation("VacancyType");
                 });
 
             modelBuilder.Entity("VacancyDetail", b =>
                 {
-                    b.HasOne("Vacancy", "RelatedVacancy")
-                        .WithMany()
-                        .HasForeignKey("RelatedVacancyId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.HasOne("Vacancy", "Vacancy")
-                        .WithMany()
-                        .HasForeignKey("VacancyId")
+                        .WithOne("VacancyDetail")
+                        .HasForeignKey("VacancyDetail", "VacancyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Vacancy", null)
-                        .WithOne("VacancyDetail")
-                        .HasForeignKey("VacancyDetail", "VacancyId1");
-
-                    b.Navigation("RelatedVacancy");
 
                     b.Navigation("Vacancy");
                 });
 
-            modelBuilder.Entity("GlorriJobs.Domain.Entities.Branch", b =>
+            modelBuilder.Entity("Branch", b =>
                 {
                     b.Navigation("Departments");
 
                     b.Navigation("Vacancies");
                 });
 
-            modelBuilder.Entity("GlorriJobs.Domain.Entities.Category", b =>
+            modelBuilder.Entity("Category", b =>
                 {
                     b.Navigation("Vacancies");
                 });
 
-            modelBuilder.Entity("GlorriJobs.Domain.Entities.City", b =>
+            modelBuilder.Entity("City", b =>
                 {
                     b.Navigation("Branches");
 
                     b.Navigation("Vacancies");
                 });
 
-            modelBuilder.Entity("GlorriJobs.Domain.Entities.Company", b =>
+            modelBuilder.Entity("Company", b =>
                 {
                     b.Navigation("Biographies");
 
@@ -673,20 +590,18 @@ namespace GlorriJobs.Persistence.Migrations
                     b.Navigation("Vacancies");
                 });
 
-            modelBuilder.Entity("GlorriJobs.Domain.Entities.Department", b =>
+            modelBuilder.Entity("Department", b =>
                 {
                     b.Navigation("Vacancies");
                 });
 
-            modelBuilder.Entity("GlorriJobs.Domain.Entities.Industry", b =>
+            modelBuilder.Entity("Industry", b =>
                 {
                     b.Navigation("Companies");
                 });
 
             modelBuilder.Entity("Vacancy", b =>
                 {
-                    b.Navigation("SubVacancies");
-
                     b.Navigation("VacancyDetail")
                         .IsRequired();
                 });

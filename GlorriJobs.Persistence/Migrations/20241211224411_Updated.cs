@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GlorriJobs.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class First : Migration
+    public partial class Updated : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -69,9 +69,10 @@ namespace GlorriJobs.Persistence.Migrations
                     EmployeeCount = table.Column<int>(type: "int", nullable: false),
                     FoundedYear = table.Column<int>(type: "int", nullable: false),
                     LogoPath = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PosterPath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ExistedVacancy = table.Column<int>(type: "int", nullable: false),
                     CompanyDetailId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IndustryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IndustryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -84,7 +85,8 @@ namespace GlorriJobs.Persistence.Migrations
                         name: "FK_Companies_Industries_IndustryId",
                         column: x => x.IndustryId,
                         principalTable: "Industries",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -118,6 +120,7 @@ namespace GlorriJobs.Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CityId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IsMain = table.Column<bool>(type: "bit", nullable: false),
                     CompanyId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -199,9 +202,8 @@ namespace GlorriJobs.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ParentVacancyId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    VacancyTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    VacancyType = table.Column<int>(type: "int", nullable: false),
                     CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CompanyId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     BranchId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -211,10 +213,7 @@ namespace GlorriJobs.Persistence.Migrations
                     IsRemote = table.Column<bool>(type: "bit", nullable: false),
                     JobLevel = table.Column<int>(type: "int", nullable: false),
                     ViewCount = table.Column<int>(type: "int", nullable: false),
-                    BranchId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CategoryId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CityId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DepartmentId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ExpireDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -227,64 +226,27 @@ namespace GlorriJobs.Persistence.Migrations
                         name: "FK_Vacancies_Branches_BranchId",
                         column: x => x.BranchId,
                         principalTable: "Branches",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Vacancies_Branches_BranchId1",
-                        column: x => x.BranchId1,
-                        principalTable: "Branches",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Vacancies_Categories_CategoryId",
                         column: x => x.CategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Vacancies_Categories_CategoryId1",
-                        column: x => x.CategoryId1,
                         principalTable: "Categories",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Vacancies_Cities_CityId",
                         column: x => x.CityId,
                         principalTable: "Cities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Vacancies_Cities_CityId1",
-                        column: x => x.CityId1,
-                        principalTable: "Cities",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Vacancies_Companies_CompanyId",
                         column: x => x.CompanyId,
                         principalTable: "Companies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Vacancies_Departments_DepartmentId",
                         column: x => x.DepartmentId,
                         principalTable: "Departments",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Vacancies_Departments_DepartmentId1",
-                        column: x => x.DepartmentId1,
-                        principalTable: "Departments",
                         principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Vacancies_Vacancies_ParentVacancyId",
-                        column: x => x.ParentVacancyId,
-                        principalTable: "Vacancies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Vacancies_Vacancies_VacancyTypeId",
-                        column: x => x.VacancyTypeId,
-                        principalTable: "Vacancies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -292,11 +254,9 @@ namespace GlorriJobs.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RelatedVacancyId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    VacancyId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ExpireDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Salary = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VacancyId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -305,12 +265,6 @@ namespace GlorriJobs.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_VacancyDetails", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_VacancyDetails_Vacancies_RelatedVacancyId",
-                        column: x => x.RelatedVacancyId,
-                        principalTable: "Vacancies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_VacancyDetails_Vacancies_VacancyId",
                         column: x => x.VacancyId,
@@ -361,29 +315,14 @@ namespace GlorriJobs.Persistence.Migrations
                 column: "BranchId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vacancies_BranchId1",
-                table: "Vacancies",
-                column: "BranchId1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Vacancies_CategoryId",
                 table: "Vacancies",
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vacancies_CategoryId1",
-                table: "Vacancies",
-                column: "CategoryId1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Vacancies_CityId",
                 table: "Vacancies",
                 column: "CityId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Vacancies_CityId1",
-                table: "Vacancies",
-                column: "CityId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Vacancies_CompanyId",
@@ -396,29 +335,10 @@ namespace GlorriJobs.Persistence.Migrations
                 column: "DepartmentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vacancies_DepartmentId1",
-                table: "Vacancies",
-                column: "DepartmentId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Vacancies_ParentVacancyId",
-                table: "Vacancies",
-                column: "ParentVacancyId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Vacancies_VacancyTypeId",
-                table: "Vacancies",
-                column: "VacancyTypeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_VacancyDetails_RelatedVacancyId",
-                table: "VacancyDetails",
-                column: "RelatedVacancyId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_VacancyDetails_VacancyId",
                 table: "VacancyDetails",
-                column: "VacancyId");
+                column: "VacancyId",
+                unique: true);
         }
 
         /// <inheritdoc />
