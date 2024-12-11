@@ -8,7 +8,10 @@ namespace GlorriJobs.Persistence.Contexts
 {
     public class GlorriJobsDbContext : DbContext
     {
-
+        public GlorriJobsDbContext(DbContextOptions<GlorriJobsDbContext> options)
+        : base(options)
+        {
+        }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Vacancy> Vacancies { get; set; }
         public DbSet<Company> Companies { get; set; }
@@ -20,76 +23,49 @@ namespace GlorriJobs.Persistence.Contexts
         public DbSet<VacancyDetail> VacancyDetails { get; set; }
         public DbSet<CompanyDetail> CompanyDetails { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(@"Server=WINDOWS-UTHG35J\\SQLEXPRESS;Database=GlorriJobs;Trusted_Connection=True;TrustServerCertificate=True;");
-        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            // Configure the one-to-one relationship between Company and CompanyDetail
+            modelBuilder.Entity<Company>()
+                .HasOne(c => c.CompanyDetail)
+                .WithOne(cd => cd.Company)
+                .HasForeignKey<CompanyDetail>(cd => cd.CompanyId);
 
-            // Configure relationships for Vacancy entity
+            // Configure the other relationships with "NO ACTION" for cascading
             modelBuilder.Entity<Vacancy>()
-                .HasOne(v => v.VacancyType) // Self-referencing foreign key
-                .WithMany()
-                .HasForeignKey(v => v.VacancyTypeId)
-                .OnDelete(DeleteBehavior.Restrict); // Prevent cascade delete
+                .HasOne(v => v.VacancyDetail)
+                .WithOne(vd => vd.Vacancy)
+                .HasForeignKey<VacancyDetail>(vd => vd.VacancyId);
 
             modelBuilder.Entity<Vacancy>()
                 .HasOne(v => v.Category)
-                .WithMany()
+                .WithMany(c => c.Vacancies)
                 .HasForeignKey(v => v.CategoryId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Vacancy>()
-                .HasOne(v => v.City)
-                .WithMany()
-                .HasForeignKey(v => v.CityId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction);  // Prevent cascading delete
 
             modelBuilder.Entity<Vacancy>()
                 .HasOne(v => v.Company)
                 .WithMany(c => c.Vacancies)
                 .HasForeignKey(v => v.CompanyId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);  // Prevent cascading delete
 
             modelBuilder.Entity<Vacancy>()
                 .HasOne(v => v.Branch)
-                .WithMany()
+                .WithMany(b => b.Vacancies)
                 .HasForeignKey(v => v.BranchId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);  // Prevent cascading delete
 
             modelBuilder.Entity<Vacancy>()
                 .HasOne(v => v.Department)
-                .WithMany()
+                .WithMany(d => d.Vacancies)
                 .HasForeignKey(v => v.DepartmentId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction);  // Prevent cascading delete
 
             modelBuilder.Entity<Vacancy>()
-                .HasOne(v => v.ParentVacancy) // Self-referencing relationship
-                .WithMany(v => v.SubVacancies)
-                .HasForeignKey(v => v.ParentVacancyId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            // Configure relationships for VacancyDetail entity
-            modelBuilder.Entity<VacancyDetail>()
-                .HasOne(vd => vd.Vacancy)
-                .WithMany()
-                .HasForeignKey(vd => vd.VacancyId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<VacancyDetail>()
-                .HasOne(vd => vd.RelatedVacancy)
-                .WithMany()
-                .HasForeignKey("RelatedVacancyId")
-                .OnDelete(DeleteBehavior.Restrict);
-
-            // Configure relationships for Company and CompanyDetail
-            modelBuilder.Entity<Company>()
-                .HasOne(c => c.CompanyDetail)
-                .WithOne(cd => cd.Company)
-                .HasForeignKey<CompanyDetail>(cd => cd.CompanyId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasOne(v => v.City)
+                .WithMany(c => c.Vacancies)
+                .HasForeignKey(v => v.CityId)
+                .OnDelete(DeleteBehavior.NoAction);  // Prevent cascading delete
         }
 
 

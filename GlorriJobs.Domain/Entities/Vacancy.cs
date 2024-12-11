@@ -3,23 +3,19 @@ using GlorriJobs.Domain.Enums;
 
 public class Vacancy : BaseEntity
 {
-    public Guid? ParentVacancyId { get; set; }
-    public Vacancy ParentVacancy { get; set; }
-    public ICollection<Vacancy> SubVacancies { get; set; }
-
     public string Title { get; set; }
-    public Guid VacancyTypeId { get; set; } // Self-referencing FK
-    public Vacancy VacancyType { get; set; }
-    public VacancyDetail VacancyDetail { get; set; }
+    public VacancyType VacancyType { get; set; }  // VacancyType Enum
 
     public Guid CategoryId { get; set; }
     public Category Category { get; set; }
 
-    public Guid CompanyId { get; set; } 
+    public Guid CompanyId { get; set; }
     public Company Company { get; set; }
 
     public Guid BranchId { get; set; }
     public Branch Branch { get; set; }
+
+    public VacancyDetail VacancyDetail { get; set; }  // One-to-One relation
 
     public Guid DepartmentId { get; set; }
     public Department Department { get; set; }
