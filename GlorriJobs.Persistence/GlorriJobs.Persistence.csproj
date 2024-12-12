@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Implements\Services\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.10">
@@ -20,7 +16,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GlorriJobs.Application\GlorriJobs.Application.csproj" />
     <ProjectReference Include="..\GlorriJobs.Domain\GlorriJobs.Domain.csproj" />
+    <ProjectReference Include="..\src\Core\GlorriJobs.Common\GlorriJobs.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
   </ItemGroup>
 
 </Project>
