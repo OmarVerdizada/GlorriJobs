@@ -1,4 +1,8 @@
 using GlorriJobs.Persistence.Contexts;
+using GlorriJobs.Persistence.Implements.Repositories.Implementations;
+using GlorriJobs.Persistence.Implements.Repositories.Interfaces;
+using GlorriJobs.Persistence.Implements.Services.Implementations;
+using GlorriJobs.Persistence.Implements.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +17,11 @@ builder.Services.AddDbContext<GlorriJobsDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration["ConnectionStrings:Default"]);
 });
+
+builder.Services.AddScoped<ICityRepository,CityRepository>();
+
+builder.Services.AddScoped<ICityService, CityService>();
+
 
 var app = builder.Build();
 

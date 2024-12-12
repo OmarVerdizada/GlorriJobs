@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlorriJobs.Infrastructure",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlorriJobs.Persistence", "GlorriJobs.Persistence\GlorriJobs.Persistence.csproj", "{D2C62CC2-8408-4F6C-9419-0D3493F66F3F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlorriJobs.Common", "src\Core\GlorriJobs.Common\GlorriJobs.Common.csproj", "{1F8DB8C8-F626-4AC5-B6D8-44C824FCCA31}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{D2C62CC2-8408-4F6C-9419-0D3493F66F3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2C62CC2-8408-4F6C-9419-0D3493F66F3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2C62CC2-8408-4F6C-9419-0D3493F66F3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F8DB8C8-F626-4AC5-B6D8-44C824FCCA31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F8DB8C8-F626-4AC5-B6D8-44C824FCCA31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F8DB8C8-F626-4AC5-B6D8-44C824FCCA31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F8DB8C8-F626-4AC5-B6D8-44C824FCCA31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{33AD63E1-0F9B-4FA0-B2F9-657B76F79668} = {27A9CF75-F1BE-4EF0-98EB-EADB7EC02D3C}
 		{AC5FC930-155C-4EDA-B15D-4B6E815099D2} = {EC7EC104-8B4F-4026-97AC-881BFD119621}
 		{D2C62CC2-8408-4F6C-9419-0D3493F66F3F} = {EC7EC104-8B4F-4026-97AC-881BFD119621}
+		{1F8DB8C8-F626-4AC5-B6D8-44C824FCCA31} = {02DA56A9-B6B5-4E79-A9C5-AF7753E43893}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {75D67A05-8EDF-4924-A260-A756130FB208}
