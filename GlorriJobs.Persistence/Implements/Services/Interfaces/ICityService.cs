@@ -11,6 +11,6 @@ public interface ICityService
     Task<Pagination<GetCityDto>> GetAll(int pageNumber=1, int take=10, bool isPaginated=false);
     Task<Pagination<GetCityDto>> SearchByName(string name, int pageNumber = 1, int pageSize = 10, bool isPaginated = false);
     Task<GetCityDto> CreateAsync(CreateCityDto createCityDto);
-    Task<GetCityDto> UpdateAsync(Guid id, GetCityDto updateCityDto);
+    Task<UpdateCityDto> UpdateAsync(Guid id, UpdateCityDto updateCityDto);
     Task DeleteAsync(Guid id);
 }
