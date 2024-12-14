@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using GlorriJobs.Persistence.Contexts;
 using GlorriJobs.Persistence.Implements.Repositories.Implementations;
 using GlorriJobs.Persistence.Implements.Repositories.Interfaces;
@@ -21,7 +22,8 @@ builder.Services.AddDbContext<GlorriJobsDbContext>(options =>
 builder.Services.AddScoped<ICityRepository,CityRepository>();
 
 builder.Services.AddScoped<ICityService, CityService>();
-
+builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
 
 var app = builder.Build();
 

@@ -8,19 +8,24 @@ using GlorriJobs.Persistence.Implements.Repositories.Interfaces;
 using Microsoft.Identity.Client;
 using GlorriJobs.Common.Exceptions;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 
 namespace GlorriJobs.Persistence.Implements.Services.Implementations;
 
 public class CityService : ICityService
 {
     private ICityRepository _cityRepository {  get; set; }  
+    private IMapper _mapper { get; }
     public CityService(ICityRepository cityRepository)
     {
         _cityRepository = cityRepository;
     }
-    public Task<GetCityDto> CreateAsync(CreateCityDto createCityDto)
+    public async Task<GetCityDto> CreateAsync(CreateCityDto createCityDto)
     {
-        throw new NotImplementedException();
+        var createdCity = _mapper.Map<City>(createCityDto);
+        await _cityRepository.AddAsync(createdCity);
+        await _cityRepository.SaveChangesAsync();
+        return _mapper.Map<GetCityDto>(createCityDto);
     }
 
     public async Task DeleteAsync(Guid id)
@@ -28,7 +33,7 @@ public class CityService : ICityService
         var city = await _cityRepository.GetByIdAsync(id);
         if (city is null)
         {
-
+            throw new NotFoundException("City is not found");
         }
     }
 
@@ -87,8 +92,20 @@ public class CityService : ICityService
         return pagination;
     }
 
-    public Task<GetCityDto> UpdateAsync(Guid id, GetCityDto updateCityDto)
+    public async Task<UpdateCityDto> UpdateAsync(Guid id, UpdateCityDto updateCityDto)
     {
-        throw new NotImplementedException();
+        if (id != updateCityDto.Id)
+        {
+            throw new BadRequestException("Id should be same with root");
+        }
+        var city=await _cityRepository.GetByIdAsync(id);
+        if(city is null)
+        {
+            throw new NotFoundException("City is not found");
+        }
+        var modifiedCity = _mapper.Map<City>(updateCityDto);
+        _cityRepository.Update(modifiedCity);
+        await _cityRepository.SaveChangesAsync();
+        return updateCityDto;
     }
 }
