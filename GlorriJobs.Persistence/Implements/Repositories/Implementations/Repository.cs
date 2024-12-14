@@ -41,8 +41,6 @@ public class Repository<T> : IRepository<T> where T : BaseEntity
         Expression<Func<T,object>> orderBy = null,
         bool isTracking = false,
         bool ascending = true,
-        int skip = 0,
-        int take = 10,
         params string[] includes)
     {
         IQueryable<T> query = Table;
@@ -65,7 +63,6 @@ public class Repository<T> : IRepository<T> where T : BaseEntity
                 : query.OrderByDescending(orderBy);
         }
 
-        query = query.Skip(skip).Take(take);
 
         if (!isTracking)
         {
