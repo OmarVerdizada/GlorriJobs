@@ -19,8 +19,6 @@ public interface IRepository<T> where T : BaseEntity
         Expression<Func<T, object>> orderBy = null,
         bool isTracking = false,
         bool ascending = true,
-        int skip = 0,
-        int take = 10,
         params string[] includes);
     Task<T?> GetByIdAsync(Guid id);
     Task<T?> GetByFiltered(Expression<Func<T, bool>> expression);
